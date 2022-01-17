@@ -1,8 +1,7 @@
-# Challenge React Designs Hooks
+# Challenge React Hooks Avancés
 
-Petit challenge sur Les Hooks de bases.
-La gestion des erreurs n'a pas été pris en compte dans ce challenge, seul si la recherche des photos ne renvoie aucun résultat rien ne se passe.
-Le package react-error-boundary sera utilisé dans les challenges suivants.
+Petit challenge sur les Hooks avancés .
+
 
 ## Description challenge
 
