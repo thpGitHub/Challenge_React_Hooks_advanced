@@ -1,5 +1,5 @@
-import "./App.css";
-import DivPages from "./Pages/DivPage";
+import './App.css'
+import DivPages from './Pages/DivPage'
 // import {ErrorBoundary} from 'react-error-boundary';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <DivPages />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import "./DivComponent.css";
-import { IconContext } from "react-icons";
-import DivButton from "./DivButton";
+import {useState, useEffect} from 'react'
+import './DivComponent.css'
+import {IconContext} from 'react-icons'
+import DivButton from './DivButton'
 
 export default function DivComponent({
   order,
@@ -13,37 +13,37 @@ export default function DivComponent({
   photo,
   browserWidth,
 }) {
-  const [photoDiv, setPhotoDiv] = useState();
+  const [photoDiv, setPhotoDiv] = useState()
 
   useEffect(() => {
     if (photo === null || photo.length === 0) {
-      return;
+      return
     }
-    console.log("photo in useEffect DivComponent", photo);
-    console.log("photo lenght in useEffect DivComponent", photo.length);
-    setPhotoDiv(photo);
-  }, [photo]);
+    console.log('photo in useEffect DivComponent', photo)
+    console.log('photo lenght in useEffect DivComponent', photo.length)
+    setPhotoDiv(photo)
+  }, [photo])
 
-  const handleDirection = (direction) => {
+  const handleDirection = direction => {
     switch (direction) {
-      case "left":
-        onChangeDivOrderLeft(indexDiv);
-        break;
-      case "right":
-        onChangeDivOrderRight(indexDiv);
-        break;
-      case "up":
-        onChangeDivOrderUp(indexDiv, order);
-        break;
-      case "down":
-        onChangeDivOrderDown(indexDiv, order);
-        break;
+      case 'left':
+        onChangeDivOrderLeft(indexDiv)
+        break
+      case 'right':
+        onChangeDivOrderRight(indexDiv)
+        break
+      case 'up':
+        onChangeDivOrderUp(indexDiv, order)
+        break
+      case 'down':
+        onChangeDivOrderDown(indexDiv, order)
+        break
       default:
-        console.log("no direction");
+        console.log('no direction')
     }
-  };
+  }
 
-  const BrowserWidth = ({ browserWidth, order }) => {
+  const BrowserWidth = ({browserWidth, order}) => {
     return (
       <>
         {order === 1 && (
@@ -113,23 +113,23 @@ export default function DivComponent({
           />
         )}
       </>
-    );
-  };
+    )
+  }
 
   return (
-    <div className="element" style={{ order: order }}>
+    <div className="element" style={{order: order}}>
       {photoDiv ? (
         <img src={photoDiv[indexDiv].urls.small} alt="img" />
       ) : (
-        "charging ...."
+        'charging ....'
       )}
 
-      <IconContext.Provider value={{ className: "react-icons" }}>
+      <IconContext.Provider value={{className: 'react-icons'}}>
         {/* {browserWidth > 680 && ( */}
         <>
           <BrowserWidth browserWidth={browserWidth} order={order} />
         </>
       </IconContext.Provider>
     </div>
-  );
+  )
 }
