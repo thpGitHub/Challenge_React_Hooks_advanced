@@ -1,6 +1,6 @@
 # Challenge React Hooks Avancés
 
-Petit challenge sur les Hooks avancés .
+Petit challenge sur les Hooks avancés.
 
 ## Description challenge
 
