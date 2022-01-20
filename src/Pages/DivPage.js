@@ -283,7 +283,7 @@ export default function DivPages() {
       /*
        * index < photos.length
        * Car le resultats du nombre de photo peut être inférieur à 9 photos
-       * la recherche hh donne un result de 6 photos !
+       * par ex. la recherche hh donne un result de 6 photos !
        */
       if (index < photos.length) {
         return (
