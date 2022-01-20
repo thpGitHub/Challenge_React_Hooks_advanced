@@ -278,12 +278,15 @@ export default function DivPages() {
   //   );
   // };
 
-  return (
-    <>
-      <Search onChangeQuery={handleChangeQuery}></Search>
-      {/* <ErrorBoundary key={Math.random()} FallbackComponent={ErrorDisplay}> */}
-      <div id="container">
-        {divsOrders.map((divOrder, index) => (
+  const displayPhotos = (divOrder, index) => {
+    if (photos) {
+      /*
+       * index < photos.length
+       * Car le resultats du nombre de photo peut être inférieur à 9 photos
+       * la recherche hh donne un result de 6 photos !
+       */
+      if (index < photos.length) {
+        return (
           <DivComponent
             order={divOrder}
             indexDiv={index}
@@ -297,7 +300,17 @@ export default function DivPages() {
           >
             élément {index + 1}
           </DivComponent>
-        ))}
+        )
+      }
+    }
+  }
+
+  return (
+    <>
+      <Search onChangeQuery={handleChangeQuery}></Search>
+      {/* <ErrorBoundary key={Math.random()} FallbackComponent={ErrorDisplay}> */}
+      <div id="container">
+        {divsOrders.map((divOrder, index) => displayPhotos(divOrder, index))}
       </div>
       {/* </ErrorBoundary> */}
     </>
