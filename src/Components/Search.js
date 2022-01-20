@@ -13,8 +13,10 @@ export default function Search({onChangeQuery}) {
 
   const handleChangeQuery = e => {
     e.preventDefault()
-    onChangeQuery(searchInput)
-    setSearchInput('')
+    if (searchInput !== '') {
+      onChangeQuery(searchInput)
+      setSearchInput('')
+    }
   }
 
   return (
