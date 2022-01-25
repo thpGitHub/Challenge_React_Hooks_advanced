@@ -9,8 +9,15 @@ export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
   const [photos, setPhotos] = useState(null)
   const [query, setQuery] = useState('orange')
+  const [status, setStatus] = useState({
+    loading: null,
+    done: null,
+    fail: null,
+  })
 
   useEffect(() => {
+    setStatus({...status, loading: 'Loading'})
+    console.log('status ===', status)
     console.log('2nd in useEffect of DivPage')
     fetch(
       // `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.REACT_APP_API_UNSPLASH_PUBLIC_KEY}&per_page=9`
@@ -20,11 +27,14 @@ export default function DivPages() {
       .then(data => {
         setPhotos(data.results)
         console.log('data result ===', data.results)
+        console.log('status2222', status)
+        setStatus({...status, loading: null, fail: null})
       })
+      .catch(error => setStatus({...status, fail: error}))
   }, [query])
 
   const browserWidth = useDimension()
-  console.log(browserWidth)
+  console.log('browserWidth', browserWidth)
 
   const handleChangeDivOrderLeft = indexDiv => {
     const divsOrders2 = [...divsOrders]
@@ -307,7 +317,7 @@ export default function DivPages() {
 
   return (
     <>
-      <Search onChangeQuery={handleChangeQuery}></Search>
+      <Search onChangeQuery={handleChangeQuery} status={status}></Search>
       {/* <ErrorBoundary key={Math.random()} FallbackComponent={ErrorDisplay}> */}
       <div id="container">
         {divsOrders.map((divOrder, index) => displayPhotos(divOrder, index))}
