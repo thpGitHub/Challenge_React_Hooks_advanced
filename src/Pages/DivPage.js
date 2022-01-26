@@ -5,6 +5,7 @@ import Search from '../Components/Search'
 import useDimension from '../Hooks/useDimension'
 import fetchPhotosReducer from '../Reducers/fetchPhotosReducer'
 // import {ErrorBoundary} from 'react-error-boundary';
+import PhotosService from '../Services/withClass/photosService'
 
 export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -18,19 +19,26 @@ export default function DivPages() {
   useEffect(() => {
     dispatch({type: 'loading'})
 
-    fetch(
-      // `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.REACT_APP_API_UNSPLASH_PUBLIC_KEY}&per_page=9`
-      `https://api.unsplash.com/search/photos?query=${query}&client_id=TI96M4j8W_9hTLmsq2t883On8hdZx6cHKAoA_eBIJrE&per_page=9`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        dispatch({type: 'done', payload: data.results})
-      })
+    PhotosService.get8FirstPhotos(query)
+      .then(data => dispatch({type: 'done', payload: data.results}))
+      // .catch(error => console.log('error in divpage ===', error))
       .catch(error => dispatch({type: 'fail', error}))
+
+    console.log('stateFetchPhotos', stateFetchPhotos)
+    console.log('stateFetchPhotos.fail ===', stateFetchPhotos.fail)
+    // fetch(
+    //   // `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.REACT_APP_API_UNSPLASH_PUBLIC_KEY}&per_page=9`
+    //   `https://api.unsplash.com/search/photos?query=${query}&client_id=TI96M4j8W_9hTLmsq2t883On8hdZx6cHKAoA_eBIJrE&per_page=9`,
+    // )
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     dispatch({type: 'done', payload: data.results})
+    //   })
+    //   .catch(error => dispatch({type: 'fail', error}))
   }, [query])
 
   const browserWidth = useDimension()
-  console.log('browserWidth', browserWidth)
+  // console.log('browserWidth', browserWidth)
 
   const handleChangeDivOrderLeft = indexDiv => {
     const divsOrders2 = [...divsOrders]
@@ -103,7 +111,7 @@ export default function DivPages() {
      * last row 1 div only
      */
     if (browserWidth >= 460 && browserWidth < 680) {
-      console.log('460->6680')
+      // console.log('460->6680')
 
       switch (order) {
         case 3:

@@ -19,8 +19,8 @@ export default function DivComponent({
     if (photo === null || photo.length === 0) {
       return
     }
-    console.log('photo in useEffect DivComponent', photo)
-    console.log('photo lenght in useEffect DivComponent', photo.length)
+    // console.log('photo in useEffect DivComponent', photo)
+    // console.log('photo lenght in useEffect DivComponent', photo.length)
     setPhotoDiv(photo)
   }, [photo])
 

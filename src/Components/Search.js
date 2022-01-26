@@ -9,7 +9,7 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
   const handleChange = e => {
     e.preventDefault()
     setSearchInput(e.target.value)
-    console.log('status in search component ===', stateFetchPhotos)
+    // console.log('status in search component ===', stateFetchPhotos)
   }
 
   const handleChangeQuery = e => {
@@ -38,7 +38,7 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
       {stateFetchPhotos.status === 'fail' && (
         <span>❌ {stateFetchPhotos.fail.message}</span>
       )}
-      {console.log('status fail ===', stateFetchPhotos.fail)}
+      {/* {console.log('status fail ===', stateFetchPhotos.fail)} */}
     </form>
   )
 }
