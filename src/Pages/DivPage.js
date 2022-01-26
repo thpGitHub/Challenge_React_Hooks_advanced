@@ -15,6 +15,20 @@ export default function DivPages() {
     fail: null,
   })
 
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'loading':
+        return {loading: 'Loading', done: null, fail: null}
+      case 'done':
+        return {loading: 'null', done: action.payload, fail: null}
+      case 'fail':
+        return {loading: 'Loading', done: null, fail: action.error}
+
+      default:
+        throw new Error('Action non supporté')
+    }
+  }
+
   useEffect(() => {
     setStatus({...status, loading: 'Loading'})
     console.log('status ===', status)
