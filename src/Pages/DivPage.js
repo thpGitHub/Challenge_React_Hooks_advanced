@@ -1,50 +1,32 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useReducer} from 'react'
 import './DivPage.css'
 import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
 import useDimension from '../Hooks/useDimension'
+import fetchPhotosReducer from '../Reducers/fetchPhotosReducer'
 // import {ErrorBoundary} from 'react-error-boundary';
 
 export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
-  const [photos, setPhotos] = useState(null)
   const [query, setQuery] = useState('orange')
-  const [status, setStatus] = useState({
-    loading: null,
-    done: null,
+  const [stateFetchPhotos, dispatch] = useReducer(fetchPhotosReducer, {
+    status: 'idle',
+    photos: null,
     fail: null,
   })
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'loading':
-        return {loading: 'Loading', done: null, fail: null}
-      case 'done':
-        return {loading: 'null', done: action.payload, fail: null}
-      case 'fail':
-        return {loading: 'Loading', done: null, fail: action.error}
-
-      default:
-        throw new Error('Action non supporté')
-    }
-  }
-
   useEffect(() => {
-    setStatus({...status, loading: 'Loading'})
-    console.log('status ===', status)
-    console.log('2nd in useEffect of DivPage')
+    dispatch({type: 'loading'})
+
     fetch(
       // `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.REACT_APP_API_UNSPLASH_PUBLIC_KEY}&per_page=9`
       `https://api.unsplash.com/search/photos?query=${query}&client_id=TI96M4j8W_9hTLmsq2t883On8hdZx6cHKAoA_eBIJrE&per_page=9`,
     )
       .then(response => response.json())
       .then(data => {
-        setPhotos(data.results)
-        console.log('data result ===', data.results)
-        console.log('status2222', status)
-        setStatus({...status, loading: null, fail: null})
+        dispatch({type: 'done', payload: data.results})
       })
-      .catch(error => setStatus({...status, fail: error}))
+      .catch(error => dispatch({type: 'fail', error}))
   }, [query])
 
   const browserWidth = useDimension()
@@ -303,13 +285,14 @@ export default function DivPages() {
   // };
 
   const displayPhotos = (divOrder, index) => {
-    if (photos) {
+    if (stateFetchPhotos.photos) {
+      // if (photos) {
       /*
        * index < photos.length
        * Car le resultats du nombre de photo peut être inférieur à 9 photos
        * par ex. la recherche hh donne un result de 6 photos !
        */
-      if (index < photos.length) {
+      if (index < stateFetchPhotos.photos.length) {
         return (
           <DivComponent
             order={divOrder}
@@ -319,7 +302,7 @@ export default function DivPages() {
             onChangeDivOrderRight={handleChangeDivOrderRight}
             onChangeDivOrderUp={handleChangeDivOrderUp}
             onChangeDivOrderDown={handleChangeDivOrderDown}
-            photo={photos}
+            photo={stateFetchPhotos.photos}
             browserWidth={browserWidth}
           >
             élément {index + 1}
@@ -331,7 +314,11 @@ export default function DivPages() {
 
   return (
     <>
-      <Search onChangeQuery={handleChangeQuery} status={status}></Search>
+      <Search
+        onChangeQuery={handleChangeQuery}
+        stateFetchPhotos={stateFetchPhotos}
+      ></Search>
+      {/* <Search onChangeQuery={handleChangeQuery} status={status}></Search> */}
       {/* <ErrorBoundary key={Math.random()} FallbackComponent={ErrorDisplay}> */}
       <div id="container">
         {divsOrders.map((divOrder, index) => displayPhotos(divOrder, index))}

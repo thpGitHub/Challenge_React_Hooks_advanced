@@ -3,13 +3,13 @@ import './Search.css'
 import {IconContext} from 'react-icons'
 import {MdImageSearch} from 'react-icons/md'
 
-export default function Search({onChangeQuery, status}) {
+export default function Search({onChangeQuery, stateFetchPhotos}) {
   const [searchInput, setSearchInput] = useState('')
 
   const handleChange = e => {
     e.preventDefault()
     setSearchInput(e.target.value)
-    console.log('status in search component ===', status)
+    console.log('status in search component ===', stateFetchPhotos)
   }
 
   const handleChangeQuery = e => {
@@ -34,9 +34,11 @@ export default function Search({onChangeQuery, status}) {
           <MdImageSearch />
         </button>
       </IconContext.Provider>
-      {status.loading && <span>⏳ Loading...</span>}
-      {status.fail && <span>❌ {status.fail.message}</span>}
-      {console.log('status fail ===', status.fail)}
+      {stateFetchPhotos.status === 'loading' && <span>⏳ Loading...</span>}
+      {stateFetchPhotos.status === 'fail' && (
+        <span>❌ {stateFetchPhotos.fail.message}</span>
+      )}
+      {console.log('status fail ===', stateFetchPhotos.fail)}
     </form>
   )
 }
