@@ -4,8 +4,9 @@ import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
 import useDimension from '../Hooks/useDimension'
 import fetchPhotosReducer from '../Reducers/fetchPhotosReducer'
-// import {ErrorBoundary} from 'react-error-boundary';
 import PhotosService from '../Services/withClass/photosService'
+// import {ErrorBoundary} from 'react-error-boundary';
+// import {get8FirstPhotos} from '../Services/withFunctions/photosService'
 
 export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -19,26 +20,13 @@ export default function DivPages() {
   useEffect(() => {
     dispatch({type: 'loading'})
 
+    // get8FirstPhotos(query)
     PhotosService.get8FirstPhotos(query)
       .then(data => dispatch({type: 'done', payload: data.results}))
-      // .catch(error => console.log('error in divpage ===', error))
       .catch(error => dispatch({type: 'fail', error}))
-
-    console.log('stateFetchPhotos', stateFetchPhotos)
-    console.log('stateFetchPhotos.fail ===', stateFetchPhotos.fail)
-    // fetch(
-    //   // `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.REACT_APP_API_UNSPLASH_PUBLIC_KEY}&per_page=9`
-    //   `https://api.unsplash.com/search/photos?query=${query}&client_id=TI96M4j8W_9hTLmsq2t883On8hdZx6cHKAoA_eBIJrE&per_page=9`,
-    // )
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     dispatch({type: 'done', payload: data.results})
-    //   })
-    //   .catch(error => dispatch({type: 'fail', error}))
   }, [query])
 
   const browserWidth = useDimension()
-  // console.log('browserWidth', browserWidth)
 
   const handleChangeDivOrderLeft = indexDiv => {
     const divsOrders2 = [...divsOrders]
