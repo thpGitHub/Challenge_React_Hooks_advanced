@@ -1,5 +1,7 @@
 # Challenge React Hooks Avancés
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1510b222-79f8-4706-b1fa-11baa2b8cdce/deploy-status)](https://app.netlify.com/sites/challenge-react-hooks-advanced/deploys)
+
 Petit challenge sur les Hooks avancés.
 
 ## Description challenge
