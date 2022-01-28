@@ -1,31 +1,20 @@
-import {useState, useEffect, useReducer} from 'react'
+import {useState} from 'react'
 import './DivPage.css'
+// ** Components **
 import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
+// ** Hooks **
 import useDimension from '../Hooks/useDimension'
-import fetchPhotosReducer from '../Reducers/fetchPhotosReducer'
-import PhotosService from '../Services/withClass/photosService'
+import useFindPhotosByQuery from '../Hooks/useFindPhotosByQuery'
+
 // import {ErrorBoundary} from 'react-error-boundary';
 // import {get8FirstPhotos} from '../Services/withFunctions/photosService'
 
 export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
   const [query, setQuery] = useState('orange')
-  const [stateFetchPhotos, dispatch] = useReducer(fetchPhotosReducer, {
-    status: 'idle',
-    photos: null,
-    fail: null,
-  })
 
-  useEffect(() => {
-    dispatch({type: 'loading'})
-
-    // get8FirstPhotos(query)
-    PhotosService.get8FirstPhotos(query)
-      .then(data => dispatch({type: 'done', payload: data.results}))
-      .catch(error => dispatch({type: 'fail', error}))
-  }, [query])
-
+  const stateFetchPhotos = useFindPhotosByQuery(query)
   const browserWidth = useDimension()
 
   const handleChangeDivOrderLeft = indexDiv => {
