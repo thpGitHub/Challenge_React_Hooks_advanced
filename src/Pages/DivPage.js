@@ -282,7 +282,6 @@ export default function DivPages() {
 
   const displayPhotos = (divOrder, index) => {
     if (stateFetchPhotos.photos) {
-      // if (photos) {
       /*
        * index < photos.length
        * Car le resultats du nombre de photo peut être inférieur à 9 photos

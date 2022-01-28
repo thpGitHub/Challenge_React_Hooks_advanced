@@ -4,7 +4,7 @@ const get8FirstPhotos = query => {
   )
     .then(response => response.json())
     .catch(error => {
-      console.log('error message in photService ===', error.message)
+      //   console.log('error message in photService ===', error.message)
       return Promise.reject(new Error(error.message))
     })
 }
