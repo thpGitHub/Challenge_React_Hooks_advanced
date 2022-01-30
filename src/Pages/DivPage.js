@@ -5,7 +5,6 @@ import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
 // ** Hooks **
 import useDimension from '../Hooks/useDimension'
-// import useFindPhotosByQuery from '../Hooks/useFindPhotosByQuery'
 import useGenericFetchDatas from '../Hooks/useGenericFetchDatas'
 // ** Services **
 import photosService from '../Services/withClass/photosService'

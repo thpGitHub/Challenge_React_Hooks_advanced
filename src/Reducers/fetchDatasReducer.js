@@ -1,5 +1,4 @@
 export default function fetchDatasReducer(state, action) {
-  // const fetchPhotosReducer = (state, action) => {
   switch (action.type) {
     case 'loading':
       return {status: 'loading', datas: null, fail: null}
