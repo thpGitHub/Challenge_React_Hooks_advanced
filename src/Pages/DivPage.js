@@ -5,7 +5,10 @@ import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
 // ** Hooks **
 import useDimension from '../Hooks/useDimension'
-import useFindPhotosByQuery from '../Hooks/useFindPhotosByQuery'
+// import useFindPhotosByQuery from '../Hooks/useFindPhotosByQuery'
+import useGenericFetchDatas from '../Hooks/useGenericFetchDatas'
+// ** Services **
+import photosService from '../Services/withClass/photosService'
 
 // import {ErrorBoundary} from 'react-error-boundary';
 // import {get8FirstPhotos} from '../Services/withFunctions/photosService'
@@ -14,7 +17,11 @@ export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
   const [query, setQuery] = useState('orange')
 
-  const stateFetchPhotos = useFindPhotosByQuery(query)
+  // const stateFetchPhotos = useFindPhotosByQuery(query)
+  const stateFetchPhotos = useGenericFetchDatas(
+    query,
+    photosService.get8FirstPhotos,
+  )
   const browserWidth = useDimension()
 
   const handleChangeDivOrderLeft = indexDiv => {
@@ -270,13 +277,13 @@ export default function DivPages() {
   // };
 
   const displayPhotos = (divOrder, index) => {
-    if (stateFetchPhotos.photos) {
+    if (stateFetchPhotos.datas) {
       /*
        * index < photos.length
        * Car le resultats du nombre de photo peut être inférieur à 9 photos
        * par ex. la recherche hh donne un result de 6 photos !
        */
-      if (index < stateFetchPhotos.photos.length) {
+      if (index < stateFetchPhotos.datas.length) {
         return (
           <DivComponent
             order={divOrder}
@@ -286,7 +293,7 @@ export default function DivPages() {
             onChangeDivOrderRight={handleChangeDivOrderRight}
             onChangeDivOrderUp={handleChangeDivOrderUp}
             onChangeDivOrderDown={handleChangeDivOrderDown}
-            photo={stateFetchPhotos.photos}
+            photo={stateFetchPhotos.datas}
             browserWidth={browserWidth}
           >
             élément {index + 1}
