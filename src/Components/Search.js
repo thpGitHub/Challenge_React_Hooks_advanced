@@ -1,10 +1,15 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import './Search.css'
+//** react icons **/
 import {IconContext} from 'react-icons'
 import {MdImageSearch} from 'react-icons/md'
+//** Contexts **/
+import {ThemeContext} from '../Contexts/ThemeContext.js'
 
 export default function Search({onChangeQuery, stateFetchPhotos}) {
   const [searchInput, setSearchInput] = useState('')
+
+  const {toggleTheme, theme} = useContext(ThemeContext)
 
   const handleChange = e => {
     e.preventDefault()
@@ -32,6 +37,12 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
       <IconContext.Provider value={{className: 'react-icons-search'}}>
         <button type="submit" className="search-button">
           <MdImageSearch />
+        </button>
+        <button
+          onClick={toggleTheme}
+          className={theme ? 'btn-toggle' : 'btn-toggle dark-btn'}
+        >
+          {theme ? 'LIGHT' : 'DARK'}
         </button>
       </IconContext.Provider>
       {stateFetchPhotos.status === 'loading' && <span>⏳ Loading...</span>}

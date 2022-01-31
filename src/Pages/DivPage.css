@@ -1,13 +1,22 @@
-#container {
+.container {
   margin: 0 1rem 0 1rem;
   display: flex;
   flex-wrap: wrap;
   max-width: 70rem;
-  box-shadow: 5px 5px 13px #929292, -5px -5px 13px #ffffff;
+  /* box-shadow: 5px 5px 13px #929292, -5px -5px 13px #ffffff; */
   min-height: 70rem;
   align-items: center;
   flex-direction: row;
   /* flex-direction: row-reverse; */
   justify-content: center;
+  /* background-color: rgb(247, 244, 244); */
+}
+.light-container {
+  background: #413f3f;
+  /* box-shadow:  5px 5px 13px #777777,
+-5px -5px 13px #878787; */
+}
+.dark-container {
+  box-shadow: 5px 5px 13px #7c7c7c, -5px -5px 13px #828282;
   background-color: rgb(247, 244, 244);
 }

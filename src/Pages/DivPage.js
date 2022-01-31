@@ -1,8 +1,11 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import './DivPage.css'
 // ** Components **
 import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
+//** Contexts **/
+import {ThemeContext} from '../Contexts/ThemeContext.js'
+// import ThemeContextProvider from '../Contexts/ThemeContext'
 // ** Hooks **
 import useDimension from '../Hooks/useDimension'
 import useGenericFetchDatas from '../Hooks/useGenericFetchDatas'
@@ -15,6 +18,8 @@ import photosService from '../Services/withClass/photosService'
 export default function DivPages() {
   const [divsOrders, setDivsOrders] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
   const [query, setQuery] = useState('orange')
+
+  const {theme} = useContext(ThemeContext)
 
   // const stateFetchPhotos = useFindPhotosByQuery(query)
   const stateFetchPhotos = useGenericFetchDatas(
@@ -304,16 +309,23 @@ export default function DivPages() {
 
   return (
     <>
+      {/* <ThemeContextProvider> */}
       <Search
         onChangeQuery={handleChangeQuery}
         stateFetchPhotos={stateFetchPhotos}
       ></Search>
       {/* <Search onChangeQuery={handleChangeQuery} status={status}></Search> */}
       {/* <ErrorBoundary key={Math.random()} FallbackComponent={ErrorDisplay}> */}
-      <div id="container">
+      {/* <div id="container" className={theme ? '.light-container' : '.dark-container'}> */}
+      <div
+        className={
+          theme ? 'container light-container' : 'container dark-container'
+        }
+      >
         {divsOrders.map((divOrder, index) => displayPhotos(divOrder, index))}
       </div>
       {/* </ErrorBoundary> */}
+      {/* </ThemeContextProvider> */}
     </>
   )
 }
