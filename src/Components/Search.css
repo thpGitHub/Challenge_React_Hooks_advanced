@@ -28,14 +28,11 @@
 }
 
 .btn-toggle {
-  position: absolute;
   right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
   border: none;
-  background-color: transparent;
-}
-.btn-toggle > img {
-  /* background-color: tomato; */
   cursor: pointer;
+  height: 4rem;
+  position: absolute;
+  background-color: transparent;
 }

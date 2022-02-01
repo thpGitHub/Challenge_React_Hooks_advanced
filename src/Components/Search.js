@@ -6,8 +6,8 @@ import {MdImageSearch} from 'react-icons/md'
 //** Contexts **/
 import {ThemeContext} from '../Contexts/ThemeContext.js'
 // ** img **
-import sunLight from '../Assets/sun-color.png'
-import sunDark from '../Assets/sun-warm.png'
+import {ReactComponent as SunLight} from '../Assets/sun-color.svg'
+import {ReactComponent as SunDark} from '../Assets/sun-warm.svg'
 
 export default function Search({onChangeQuery, stateFetchPhotos}) {
   const [searchInput, setSearchInput] = useState('')
@@ -45,28 +45,13 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
           onClick={toggleTheme}
           className={theme ? 'btn-toggle' : 'btn-toggle dark-btn'}
         >
-          {/* {theme ? <h1>tutu</h1> : 2} */}
-          {theme ? (
-            <img
-              src={sunLight}
-              style={{width: '25px', height: '25px'}}
-              alt="sun Light"
-            />
-          ) : (
-            <img
-              src={sunDark}
-              style={{width: '25px', height: '25px'}}
-              alt="sun dark"
-            />
-          )}
-          {/* {theme ? 'LIGHT' : 'DARK'} */}
+          {theme ? <SunLight /> : <SunDark />}
         </button>
       </IconContext.Provider>
       {stateFetchPhotos.status === 'loading' && <span>⏳ Loading...</span>}
       {stateFetchPhotos.status === 'fail' && (
         <span>❌ {stateFetchPhotos.fail.message}</span>
       )}
-      {/* {console.log('status fail ===', stateFetchPhotos.fail)} */}
     </form>
   )
 }
