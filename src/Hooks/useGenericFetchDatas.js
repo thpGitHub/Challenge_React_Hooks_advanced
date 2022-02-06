@@ -16,7 +16,7 @@ export default function useGenericFetchDatas(query, fnFetch) {
    */
   useEffect(() => {
     dispatch({type: 'loading'})
-    console.log('state.datas', state.datas ? state.datas[1].urls.small : null)
+    // console.log('state.datas', state.datas ? state.datas[1].urls.small : null)
     // get8FirstPhotos(query)
     // PhotosService.get8FirstPhotos(query)
     fnFetch(query)
