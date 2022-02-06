@@ -3,7 +3,7 @@ import './DivPage.css'
 // ** Components **
 import DivComponent from '../Components/DivComponent'
 import Search from '../Components/Search'
-//** Contexts **/
+// ** Contexts **/
 import {ThemeContext} from '../Contexts/ThemeContext.js'
 // import ThemeContextProvider from '../Contexts/ThemeContext'
 // ** Hooks **

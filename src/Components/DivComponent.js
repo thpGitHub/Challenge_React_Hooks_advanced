@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import './DivComponent.css'
 import {IconContext} from 'react-icons'
+// ** components
 import DivButton from './DivButton'
 
 export default function DivComponent({
