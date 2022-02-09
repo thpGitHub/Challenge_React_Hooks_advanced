@@ -36,6 +36,7 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
         placeholder=" Search Photos ...."
         onChange={handleChange}
         value={searchInput}
+        autoFocus
       />
       <IconContext.Provider value={{className: 'react-icons-search'}}>
         <button type="submit" className="search-button">
