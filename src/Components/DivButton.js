@@ -12,13 +12,13 @@ export default function DivButton({handleDirection, direction}) {
   const handleIcons = direction => {
     switch (direction) {
       case 'right':
-        return <BsFillArrowRightCircleFill />
+        return <BsFillArrowRightCircleFill data-testid="Arrow-Right" />
       case 'left':
-        return <BsFillArrowLeftCircleFill />
+        return <BsFillArrowLeftCircleFill data-testid="Arrow-Left" />
       case 'up':
-        return <BsFillArrowUpCircleFill />
+        return <BsFillArrowUpCircleFill data-testid="Arrow-Up" />
       case 'down':
-        return <BsFillArrowDownCircleFill />
+        return <BsFillArrowDownCircleFill data-testid="Arrow-Down" />
       default:
         console.log('no direction')
     }

@@ -46,7 +46,11 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
           onClick={toggleTheme}
           className={theme ? 'btn-toggle' : 'btn-toggle dark-btn'}
         >
-          {theme ? <SunLight /> : <SunDark />}
+          {theme ? (
+            <SunLight data-testid="SunLight" />
+          ) : (
+            <SunDark data-testid="SunDark" />
+          )}
         </button>
       </IconContext.Provider>
       {stateFetchPhotos.status === 'loading' && <span>⏳ Loading...</span>}

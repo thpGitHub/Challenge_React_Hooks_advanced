@@ -106,6 +106,7 @@ export default function DivComponent({
           />
         )}
         {browserWidth >= 460 && browserWidth < 680 && order > 2 && (
+          // a vérifier attributs indexDiv et Order non utilisés dans DivButton !!!
           <DivButton
             handleDirection={handleDirection}
             direction="up"
