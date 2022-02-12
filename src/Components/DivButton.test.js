@@ -7,7 +7,7 @@ import {render, screen} from '@testing-library/react'
 //   BsFillArrowUpCircleFill,
 // } from 'react-icons/bs'
 
-describe('DivButton', () => {
+describe('DivButton Component', () => {
   let handleDirection = () => {
     console.log('direction')
   }

@@ -1,31 +1,42 @@
 import Search from '../Components/Search.js'
 import {render, fireEvent, screen} from '@testing-library/react'
 //** Contexts **/
-// import {ThemeContext} from '../Contexts/ThemeContext.js'
 import ThemeContextProvider from '../Contexts/ThemeContext.js'
 
-it('Testing Search Component', async () => {
-  // const {theme} = useContext(ThemeContext)
-  const handleChangeQuery = changeQuery => {
-    const changeQuery2 = changeQuery
+describe('Search Component', () => {
+  const SearchComponent = () => {
+    const handleChangeQuery = changeQuery => {
+      const fakeChangeQuery = changeQuery
+    }
+    const stateFetchPhotos = () => {
+      const fakePhoto = 'photo'
+    }
+    render(
+      <ThemeContextProvider>
+        <Search
+          onChangeQuery={handleChangeQuery}
+          stateFetchPhotos={stateFetchPhotos}
+        />
+      </ThemeContextProvider>,
+    )
   }
-  const stateFetchPhotos = () => {
-    const photo = 'photo'
-  }
-  render(
-    <ThemeContextProvider>
-      <Search
-        onChangeQuery={handleChangeQuery}
-        stateFetchPhotos={stateFetchPhotos}
-      />
-    </ThemeContextProvider>,
-  )
 
-  let element = screen.getByTestId('SunDark')
-  expect(element.getAttribute('data-testid')).toBe('SunDark')
+  it('Should render without crashing', async () => {
+    SearchComponent()
+  })
 
-  fireEvent.click(element)
+  it('Should icone theme SunDark exist', async () => {
+    SearchComponent()
+    expect(screen.getByTestId('SunDark')).toBeTruthy()
+  })
 
-  element = screen.getByTestId('SunLight')
-  expect(element.getAttribute('data-testid')).toBe('SunLight')
+  it('Should change theme', async () => {
+    SearchComponent()
+    let element = screen.getByTestId('SunDark')
+
+    fireEvent.click(element)
+
+    element = screen.getByTestId('SunLight')
+    expect(element.getAttribute('data-testid')).toBe('SunLight')
+  })
 })
