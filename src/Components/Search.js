@@ -53,9 +53,11 @@ export default function Search({onChangeQuery, stateFetchPhotos}) {
           )}
         </button>
       </IconContext.Provider>
-      {stateFetchPhotos.status === 'loading' && <span>⏳ Loading...</span>}
+      {stateFetchPhotos.status === 'loading' && (
+        <span data-testid="Loading">⏳ Loading...</span>
+      )}
       {stateFetchPhotos.status === 'fail' && (
-        <span>❌ {stateFetchPhotos.fail.message}</span>
+        <span data-testid="Fail">❌ {stateFetchPhotos.fail.message}</span>
       )}
     </form>
   )
